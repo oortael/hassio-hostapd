@@ -33,9 +33,9 @@ The available configuration options are as follows (this is filled in with some 
     "deny_mac_addresses": ['ab:cd:ef:fe:dc:ba']
 }
 ```
-**Required config options**: ssid, wpa_passphrase, channel, address, netmask, broadcast, hide_ssid
+**Required config options**: ssid, wpa_passphrase, channel, address, netmask, broadcast
 
-**Optional config options**: interface (defaults to wlan0), allow_mac_addresses, deny_mac_addresses
+**Optional config options**: interface (defaults to wlan0), hide_ssid (defaults to 0/visible), allow_mac_addresses, deny_mac_addresses
 
 **Note**: _This is just an example, don't copy and paste it! Create your own!_
 
