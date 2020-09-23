@@ -26,9 +26,17 @@ The available configuration options are as follows (this is filled in with some 
     "channel": "6",
     "address": "192.168.99.1",
     "netmask": "255.255.255.0",
-    "broadcast": "192.168.99.254"
+    "broadcast": "192.168.99.255",
+    "interface": "wlan0",
+    "hide_ssid": "0",
+    "allow_mac_addresses": [],
+    "deny_mac_addresses": ['ab:cd:ef:fe:dc:ba']
 }
 ```
+**Required config options**: ssid, wpa_passphrase, channel, address, netmask, broadcast, hide_ssid
+
+**Optional config options**: interface (defaults to wlan0), allow_mac_addresses, deny_mac_addresses
+
 **Note**: _This is just an example, don't copy and paste it! Create your own!_
 
 [buymeacoffee-shield]: https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg
