@@ -1,5 +1,5 @@
 {
-  "name": "Hass.io Addons by DavidRamosWeb",
-  "url": "https://github.com/davidramosweb/hassio-addons",
-  "maintainer": "David Ramos <info@davidramosweb.com>"
+  "name": "Hass.io Addons by DavidRamosWeb modified by oortael",
+  "url": "https://github.com/oortael/hassio-hostapd",
+  "maintainer": "Oortael"
 }
