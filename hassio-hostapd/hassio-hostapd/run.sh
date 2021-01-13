@@ -31,7 +31,7 @@ if [ ${#INTERFACE} -eq 0 ]; then
     INTERFACE="wlan0"
 fi
 
-echo "iface $INTERFACE inet static"$'\n' > /etc/network/interfaces
+echo "iface $INTERFACE inet static" > /etc/network/interfaces
 
 echo "Set nmcli managed no"
 nmcli dev set $INTERFACE managed no
@@ -43,9 +43,6 @@ trap 'term_handler' SIGTERM
 ### MAC address filtering
 ## Allow is more restrictive, so we prioritise that and set
 ## macaddr_acl to 1, and add allowed MAC addresses to hostapd.allow
-cat /hostapd.conf.base > /hostapd.conf
-echo "" > /hostapd.allow
-echo "" > /hostapd.deny
 if [ ${#ALLOW_MAC_ADDRESSES} -ge 1 ]; then
     echo "macaddr_acl=1"$'\n' >> /hostapd.conf
     ALLOWED=($ALLOW_MAC_ADDRESSES)
@@ -114,15 +111,12 @@ echo "Setup interface ..."
 #ip link set $INTERFACE down
 
 ifdown $INTERFACE
-ip addr flush dev $INTERFACE
 
 echo "  address $ADDRESS" >> /etc/network/interfaces
 echo "  netmask $NETMASK" >> /etc/network/interfaces
 echo "  broadcast $BROADCAST" >> /etc/network/interfaces
 
 ifup $INTERFACE
-#ip link set $INTERFACE up
-
 
 echo "Starting HostAP daemon ..."
 killall hostapd; hostapd -d /hostapd.conf & wait ${!}
