@@ -38,7 +38,8 @@
     "interface": "wlan0",
     "hide_ssid": "0",
     "allow_mac_addresses": [],
-    "deny_mac_addresses": []
+    "deny_mac_addresses": [],
+    "country": "CA"
 
   },
   "schema": {
@@ -51,6 +52,7 @@
     "interface": "str",
     "hide_ssid": "int",
     "allow_mac_addresses": ["str"],
-    "deny_mac_addresses": ["str"]
+    "deny_mac_addresses": ["str"],
+    "country": "str"
   }
 } 
