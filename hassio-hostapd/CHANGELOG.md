@@ -1,5 +1,18 @@
 # Changelog
 
+## [1.0.6]
+### Fixed
+- Add configuration entry to specify country
+
+### Changed
+- Change how we bring up the interface.
+
+### Todo
+- Fix 'restart' to change some interface options (including IP). Currently the only sure way is to reboot the system.
+
+## [1.0.5]
+### Internal
+
 ## [1.0.4]
 ### Fixed
 - Remove networkmanager, net-tools, sudo versions (as per https://github.com/davidramosweb/hassio-addons/pull/15, https://github.com/davidramosweb/hassio-addons/pull/8, https://github.com/davidramosweb/hassio-addons/issues/14, https://github.com/davidramosweb/hassio-addons/issues/13)
