@@ -23,6 +23,7 @@ INTERFACE=$(jq --raw-output ".interface" $CONFIG_PATH)
 HIDE_SSID=$(jq --raw-output ".hide_ssid" $CONFIG_PATH)
 ALLOW_MAC_ADDRESSES=$(jq --raw-output '.allow_mac_addresses | join(" ")' $CONFIG_PATH)
 DENY_MAC_ADDRESSES=$(jq --raw-output '.deny_mac_addresses | join(" ")' $CONFIG_PATH)
+COUNTRY=$(jq --raw-output ".country" $CONFIG_PATH)
 
 # Set interface as wlan0 if not specified in config
 if [ ${#INTERFACE} -eq 0 ]; then
@@ -63,9 +64,15 @@ if [ ${#ALLOW_MAC_ADDRESSES} -ge 1 ]; then
         fi
 
 fi
+# Set wireless country if specified in config
+if [ ${#COUNTRY} -ne 0 ]; then
+    echo "country_code=${COUNTRY}"$'\n' >> /hostapd.conf
+fi
+
+
 
 # Add interface to hostapd.conf
-echo "interface=$INTERFACE"$'\n' >> /hostapd.conf
+echo "interface=$INTERFACE" >> /hostapd.conf
 
 # Enforces required env variables
 required_vars=(SSID WPA_PASSPHRASE CHANNEL ADDRESS NETMASK BROADCAST)
@@ -100,13 +107,16 @@ echo "Setup interface ..."
 #ip addr add ${IP_ADDRESS}/24 dev wlan0
 #ip link set wlan0 up
 
-ip link set $INTERFACE down
+#ip link set $INTERFACE down
 
-echo "address $ADDRESS"$'\n' >> /etc/network/interfaces
-echo "netmask $NETMASK"$'\n' >> /etc/network/interfaces
-echo "broadcast $BROADCAST"$'\n' >> /etc/network/interfaces
+ifdown $INTERFACE
 
-ip link set $INTERFACE up
+echo "  address $ADDRESS" >> /etc/network/interfaces
+echo "  netmask $NETMASK" >> /etc/network/interfaces
+echo "  broadcast $BROADCAST" >> /etc/network/interfaces
+
+ifup $INTERFACE
+#ip link set $INTERFACE up
 
 
 echo "Starting HostAP daemon ..."
